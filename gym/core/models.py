@@ -17,69 +17,91 @@ class MedidasCorporales(models.Model):
     fecha_medicion= models.DateField
     porcentaje_grasa= models.FloatField
 
-class Entrenador(models.Model):
+class Area(models.Model):
     nombre=models.CharField
-    genero=models.CharField(choices= GENDER_CHOICES)
-    lista_atletas= models.ForeignKey(
-        Atleta, related_name="results", on_delete=models.PROTECT, blank=True, null=True
-    )
-    horario=models.DateTimeField
-    foto=models.ImageField
+    objetivo=models.CharField
+    direccion=models.CharField
+    
 
 class Ejercicios(models.Model):
+    area=models.ForeignKey(
+        Area, related_name="results", on_delete=models.PROTECT, blank=True, null=True
+    )
     nombre= models.CharField
     zona_muscular= models.CharField
     equipo_necesario=models.CharField
-    area=models.CharField
     foto=models.ImageField
     tipo_de_ejercicio=models.CharField #fuerza, cardio, elasticidad etc
     descripcion=models.CharField
 
 
 class Rutina(models.Model):
-    dias_entrenamiento=models.DateField
-    dias_descanso=models.DateField
-    ejercicios=models.ForeignKey(
+    lista_ejercicios=models.ForeignKey(
         Ejercicios, related_name="results", on_delete=models.PROTECT, blank=True, null=True
     )
+    # dias_entrenamiento=models.DateField
+    # dias_descanso=models.DateField
     duracion_rutina=models.DurationField
-    duracion_ejercicio= models.DurationField
-    repeticiones=models.IntegerField
-    tiempo_descanso=models.DurationField
-    cantidad_series=models.IntegerField
+    # duracion_ejercicio= models.DurationField
+    # repeticiones=models.IntegerField
+    # tiempo_descanso=models.DurationField
+    # cantidad_series=models.IntegerField
+    # peso=models.FloatField
+
 
 class Alimentos(models.Model):
     pass
 
+class Gramaje(models.Model):
+    alimentos=models.ForeignKey(
+        Alimentos, related_name="results", on_delete=models.PROTECT, blank=True, null=True
+    )
+    cantidad=models.FloatField
+
 class Dieta(models.Model):
+    lista_alimentos=models.ForeignKey(
+        Gramaje, related_name="results", on_delete=models.PROTECT, blank=True, null=True        
+    )
     nombre_dieta=models.CharField
     descripcion=models.CharField 
     proposito=models.CharField
-    lista_alimentos=models.CharField #debe ser importado de la clase alimento
-    cantidad=models.FloatField
     fecha_inicio= models.DateField
     fecha_final= models.DateField
     duracion= models.DurationField(fecha_final-fecha_inicio)
-    
 
 class Records(models.Model):
-    fecha= models.DateField
     ejercicio=models.ForeignKey(
         Ejercicios, related_name="results", on_delete=models.PROTECT, blank=True, null=True
-    )
+    )    
+    fecha= models.DateField
     repeticiones= models.IntegerField
     peso_alcanzado= models.FloatField
 
-class Atleta(models.Model):
-    nombre= models.CharField
-    edad= models.IntegerField
-    genero = models.CharField(choices=GENDER_CHOICES)
-    foto= models.ImageField
-    rutina= models.ForeignKey(
+class Actividad(models.Model):
+    rutina=models.ForeignKey(
         Rutina, related_name="results", on_delete=models.PROTECT, blank=True, null=True
     )
-    entrenador= models.ForeignKey(
-        Entrenador, related_name="results", on_delete=models.PROTECT, blank=True, null=True
+    ejercicios=models.ForeignKey(
+        Ejercicios, related_name="results", on_delete=models.PROTECT, blank=True, null=True
+    )
+    dieta= models.ForeignKey(
+        Dieta, related_name="results", on_delete=models.PROTECT, blank=True, null=True     
+    )
+    dias_entrenamiento=models.DateField
+    dias_descanso=models.DateField
+    duracion_actividad=models.DurationField
+    duracion_ejercicio= models.DurationField
+    repeticiones=models.IntegerField
+    tiempo_descanso=models.DurationField
+    cantidad_series=models.IntegerField
+    peso=models.FloatField
+
+class Cliente(models.Model):
+    entrenador=models.ForeignKey(
+        'self', related_name="results", on_delete=models.PROTECT, blank=True, null=True 
+    )
+    rutina= models.ForeignKey(
+        Rutina, related_name="results", on_delete=models.PROTECT, blank=True, null=True
     )
     suscripcion=models.ForeignKey(
         Suscripcion, related_name="results", on_delete=models.PROTECT, blank=True, null=True
@@ -87,3 +109,7 @@ class Atleta(models.Model):
     medidas_corporales= models.ForeignKey(
         MedidasCorporales, related_name="results", on_delete=models.PROTECT, blank=True, null=True
     )
+    nombre= models.CharField
+    edad= models.IntegerField
+    genero = models.CharField(choices=GENDER_CHOICES)
+    foto= models.ImageField
