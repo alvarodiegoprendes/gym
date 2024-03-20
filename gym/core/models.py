@@ -21,11 +21,12 @@ class Area(models.Model):
     nombre=models.CharField
     objetivo=models.CharField
     direccion=models.CharField
+    descripcion = models.CharField
     
 
 class Ejercicios(models.Model):
     area=models.ForeignKey(
-        Area, related_name="results", on_delete=models.PROTECT, blank=True, null=True
+        Area, related_name="ejercicios", on_delete=models.PROTECT, blank=True, null=True
     )
     nombre= models.CharField
     zona_muscular= models.CharField
@@ -37,7 +38,7 @@ class Ejercicios(models.Model):
 
 class Rutina(models.Model):
     lista_ejercicios=models.ForeignKey(
-        Ejercicios, related_name="results", on_delete=models.PROTECT, blank=True, null=True
+        Ejercicios, related_name="rutina", on_delete=models.PROTECT, blank=True, null=True
     )
     # dias_entrenamiento=models.DateField
     # dias_descanso=models.DateField
@@ -50,17 +51,18 @@ class Rutina(models.Model):
 
 
 class Alimentos(models.Model):
-    pass
+    nombre= models.CharField
+    especie = models.CharField
 
 class Gramaje(models.Model):
     alimentos=models.ForeignKey(
-        Alimentos, related_name="results", on_delete=models.PROTECT, blank=True, null=True
+        Alimentos, related_name="gramaje", on_delete=models.PROTECT, blank=True, null=True
     )
     cantidad=models.FloatField
 
 class Dieta(models.Model):
     lista_alimentos=models.ForeignKey(
-        Gramaje, related_name="results", on_delete=models.PROTECT, blank=True, null=True        
+        Gramaje, related_name="dieta", on_delete=models.PROTECT, blank=True, null=True        
     )
     nombre_dieta=models.CharField
     descripcion=models.CharField 
@@ -71,7 +73,7 @@ class Dieta(models.Model):
 
 class Records(models.Model):
     ejercicio=models.ForeignKey(
-        Ejercicios, related_name="results", on_delete=models.PROTECT, blank=True, null=True
+        Ejercicios, related_name="records", on_delete=models.PROTECT, blank=True, null=True
     )    
     fecha= models.DateField
     repeticiones= models.IntegerField
@@ -79,17 +81,16 @@ class Records(models.Model):
 
 class Actividad(models.Model):
     rutina=models.ForeignKey(
-        Rutina, related_name="results", on_delete=models.PROTECT, blank=True, null=True
+        Rutina, related_name="actividad", on_delete=models.PROTECT, blank=True, null=True
     )
     ejercicios=models.ForeignKey(
-        Ejercicios, related_name="results", on_delete=models.PROTECT, blank=True, null=True
+        Ejercicios, related_name="actividad", on_delete=models.PROTECT, blank=True, null=True
     )
     dieta= models.ForeignKey(
-        Dieta, related_name="results", on_delete=models.PROTECT, blank=True, null=True     
+        Dieta, related_name="actividad", on_delete=models.PROTECT, blank=True, null=True     
     )
     dias_entrenamiento=models.DateField
     dias_descanso=models.DateField
-    duracion_actividad=models.DurationField
     duracion_ejercicio= models.DurationField
     repeticiones=models.IntegerField
     tiempo_descanso=models.DurationField
@@ -98,16 +99,16 @@ class Actividad(models.Model):
 
 class Cliente(models.Model):
     entrenador=models.ForeignKey(
-        'self', related_name="results", on_delete=models.PROTECT, blank=True, null=True 
+        'self', related_name="cliente", on_delete=models.PROTECT, blank=True, null=True 
     )
     rutina= models.ForeignKey(
-        Rutina, related_name="results", on_delete=models.PROTECT, blank=True, null=True
+        Rutina, related_name="cliente", on_delete=models.PROTECT, blank=True, null=True
     )
     suscripcion=models.ForeignKey(
-        Suscripcion, related_name="results", on_delete=models.PROTECT, blank=True, null=True
+        Suscripcion, related_name="cliente", on_delete=models.PROTECT, blank=True, null=True
     )
     medidas_corporales= models.ForeignKey(
-        MedidasCorporales, related_name="results", on_delete=models.PROTECT, blank=True, null=True
+        MedidasCorporales, related_name="cliente", on_delete=models.PROTECT, blank=True, null=True
     )
     nombre= models.CharField
     edad= models.IntegerField
