@@ -2,9 +2,11 @@ from django.shortcuts import render
 
 from django.http import HttpResponse , HttpResponseRedirect
 
+
+
 # Create your views here.
 
-
+""" 
 dias_semanas={
     "lunes":"dia de pecho",
     "martes": "dia de hombro",
@@ -28,4 +30,7 @@ def saludar(request,dia):
     except: 
         rutina="no hay rutina"
     rutina_html= f"<h2>{rutina}</h2>"
-    return HttpResponse(rutina_html)
+    return HttpResponse(rutina_html) """
+
+def hola(request):
+    return render(request, 'index.html')
