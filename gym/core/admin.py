@@ -5,3 +5,4 @@ from . import models
 
 admin.site.register(models.Cliente)
 admin.site.register(models.Suscripcion)
+admin.site.register(models.Alimentos)

@@ -1,6 +1,6 @@
 from typing import Any
 from django.db import models
-from enum import Enum
+
 
 # Create your models here.
 
@@ -59,8 +59,17 @@ class Rutina(models.Model):
 
 
 class Alimentos(models.Model):
-    nombre= models.CharField(max_length=10, blank=True, null=True)
-    especie = models.CharField(max_length=10, blank=True, null=True)
+
+    nombre= models.CharField(max_length=200, blank=True, null=True)
+#    especie = models.CharField(max_length=10, blank=True, null=True)
+    calorias= models.FloatField(default=0)
+    proteinas= models.FloatField(default=0)
+    carbohidratos= models.FloatField(default=0)
+    grasas= models.FloatField(default=0)
+ #   "calorias": "106.0",
+ #   "proteinas": "2.2",
+  #  "carbohidratos": "24.0",
+  #  "grasas": "0.1"
     def __str__(self):
         return self.nombre
 
