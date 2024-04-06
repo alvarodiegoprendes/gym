@@ -1,9 +1,7 @@
 from django.shortcuts import render
-
-from django.http import HttpResponse , HttpResponseRedirect
-
-
-
+from django.http import HttpResponse, HttpResponseRedirect
+from .models import *
+from .forms import *
 # Create your views here.
 
 """ 
@@ -32,5 +30,23 @@ def saludar(request,dia):
     rutina_html= f"<h2>{rutina}</h2>"
     return HttpResponse(rutina_html) """
 
-def hola(request):
-    return render(request, 'index.html')
+
+def mostrar_alimentos(request):
+    if request.method == 'GET':
+        return render(request, 'alimentos.html', {
+            'alimentos': Crear_gramaje()
+        })
+    else:
+        Gramaje.objects.create(
+            alimentos=request.POST['alimentos'],
+            cantidad=request.POST['cantidad'],
+
+        )
+    return render(request, 'alimentos.html', {
+        'alimentos': Crear_gramaje()
+    })
+
+
+def mostrar_rutina(request):
+    rutina = Rutina.objects.all()
+    return render(request, 'rutina.html', {'rutina': rutina})

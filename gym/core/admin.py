@@ -6,3 +6,6 @@ from . import models
 admin.site.register(models.Cliente)
 admin.site.register(models.Suscripcion)
 admin.site.register(models.Alimentos)
+admin.site.register(models.MedidasCorporales)
+admin.site.register(models.Rutina)
+

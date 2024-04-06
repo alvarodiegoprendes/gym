@@ -4,7 +4,7 @@ from django.db import models
 
 # Create your models here.
 
-GENDER_CHOICES = (("male", "MALE"), ("female", "FEMALE"))
+GENDER_CHOICES = (("male","MALE"), ("female", "FEMALE"))
 
 class Suscripcion(models.Model):
     fecha_inscripcion=models.DateField(blank=True, null=True)
@@ -17,8 +17,8 @@ class Suscripcion(models.Model):
 class MedidasCorporales(models.Model):
     altura= models.FloatField(default=0)
     peso= models.FloatField(default=0)
-    fecha_medicion= models.DateField
-    porcentaje_grasa= models.FloatField
+    fecha_medicion= models.DateField(blank=True, null=True)
+    porcentaje_grasa= models.FloatField(blank=True, null=True)
 
 class Area(models.Model):
     nombre=models.CharField(max_length=10, blank=True, null=True)
@@ -124,7 +124,7 @@ class Cliente(models.Model):
         'self', related_name="cliente", on_delete=models.PROTECT, blank=True, null=True 
     )
     rutina= models.ForeignKey(
-        Rutina, related_name="cliente", on_delete=models.PROTECT, blank=True, null=True
+        Actividad, related_name="cliente", on_delete=models.PROTECT, blank=True, null=True
     )
     suscripcion=models.ForeignKey(
         Suscripcion, related_name="cliente", on_delete=models.PROTECT, blank=True, null=True
@@ -132,6 +132,7 @@ class Cliente(models.Model):
     medidas_corporales= models.ForeignKey(
         MedidasCorporales, related_name="cliente", on_delete=models.PROTECT, blank=True, null=True
     )
+    es_entrenador= models.BooleanField(default = False)
     nombre= models.CharField(max_length=10, blank=True, null=True)
     edad= models.IntegerField(default=0)
     genero = models.CharField(max_length=30 ,choices=GENDER_CHOICES)
@@ -139,4 +140,6 @@ class Cliente(models.Model):
     )
     
     def __str__(self):
-        return self.nombre + " " + str(self.suscripcion.fecha_vencimiento)
+        return self.nombre 
+
+
