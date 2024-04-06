@@ -41,10 +41,11 @@ def mostrar_alimentos(request):
             alimentos=request.POST['alimentos'],
             cantidad=request.POST['cantidad'],
 
-        )
-    return render(request, 'alimentos.html', {
-        'alimentos': Crear_gramaje()
-    })
+        ) 
+        return render(request, 'alimentos.html', {
+            'alimentos': Crear_gramaje()
+        })
+
 
 
 def mostrar_rutina(request):
