@@ -37,11 +37,15 @@ def mostrar_alimentos(request):
             'alimentos': Crear_gramaje()
         })
     else:
-        Gramaje.objects.create(
+        crear= Gramaje(alimentos= request.POST['alimentos'],cantidad=request.POST['cantidad'], )
+        crear.save()
+
+        
+        """Gramaje.objects.create(
             alimentos=request.POST['alimentos'],
             cantidad=request.POST['cantidad'],
 
-        ) 
+        )  """
         return render(request, 'alimentos.html', {
             'alimentos': Crear_gramaje()
         })
