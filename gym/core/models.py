@@ -66,19 +66,21 @@ class Alimentos(models.Model):
     proteinas= models.FloatField(default=0)
     carbohidratos= models.FloatField(default=0)
     grasas= models.FloatField(default=0)
- #   "calorias": "106.0",
- #   "proteinas": "2.2",
-  #  "carbohidratos": "24.0",
-  #  "grasas": "0.1"
     def __str__(self):
         return self.nombre
 
 class Gramaje(models.Model):
-    alimentos=models.ForeignKey(
+    """
+     alimentos=models.ForeignKey(
         Alimentos, related_name="gramaje", on_delete=models.PROTECT, blank=True, null=True
-    )
+    ) 
+    """
+    alimentos=models.ManyToManyField(Alimentos) 
+
     cantidad=models.FloatField(default=0)
 
+    #def __str__(self) -> str:
+    #    return self.alimentos
 class Dieta(models.Model):
     lista_alimentos=models.ForeignKey(
         Gramaje, related_name="dieta", on_delete=models.PROTECT, blank=True, null=True        

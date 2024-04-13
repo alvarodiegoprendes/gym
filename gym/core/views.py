@@ -31,7 +31,8 @@ def saludar(request,dia):
     return HttpResponse(rutina_html) """
 
 
-def mostrar_alimentos(request):
+
+""" def mostrar_alimentos(request):
     if request.method == 'GET':
         return render(request, 'alimentos.html', {
             'alimentos': Crear_gramaje()
@@ -40,16 +41,46 @@ def mostrar_alimentos(request):
         crear= Gramaje(alimentos= request.POST['alimentos'],cantidad=request.POST['cantidad'], )
         crear.save()
 
+
+
+        if form.is_valid():
+            alimentos_seleccionados = form.cleaned_data['alimentos']
+            cantidad = form.cleaned_data['cantidad']
+
+            for alimento in alimentos_seleccionados:
+                gramaje= Gramaje(alimento=alimento,cantidad=int(cantidad[alimento]))
+                gramaje.save()
+            #    Gramaje.objects.create(alimentos=alimento, cantidad=cantidad[alimento])
         
-        """Gramaje.objects.create(
+            
+
+
+
+
+        Gramaje.objects.create(
             alimentos=request.POST['alimentos'],
             cantidad=request.POST['cantidad'],
 
-        )  """
+        ) 
         return render(request, 'alimentos.html', {
             'alimentos': Crear_gramaje()
         })
+ """
 
+def mostrar_alimentos(request):
+    if request.method == 'POST':
+        form = Crear_gramaje(request.POST)
+        if form.is_valid():
+            print("jpla")
+            alimentos_seleccionados = form.cleaned_data['alimentos']
+            cantidad = form.cleaned_data['cantidad']
+            for alimento in alimentos_seleccionados:
+                gramaje= Gramaje(alimento=alimento,cantidad=cantidad[alimento])
+                gramaje.save()
+            #    Gramaje.objects.create(alimentos=alimento, cantidad=cantidad[alimento])
+        else:
+            print(form.errors)
+    return render(request, 'alimentos.html', {'alimentos': Crear_gramaje()})
 
 
 def mostrar_rutina(request):
