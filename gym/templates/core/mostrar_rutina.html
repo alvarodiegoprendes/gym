@@ -1,0 +1,35 @@
+{% extends "layouts/base.html" %} 
+{% load static %}
+{% block title %}
+
+<title>mostrando todas las rutinas</title>
+
+{% endblock title %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'gym/css/core/mostrar_rutinas.css' %}">
+{% endblock extra_css %}
+
+
+{% block content %} 
+
+<div class="rutina-container">
+{% for rutina in lista_rutina %}
+    <div class="tarjeta">
+        <h3>Nombre:</h3>
+        <li>{{rutina.nombre}}</li>
+        <h3>Días de entrenamiento:</h3>
+            {% if rutina.dias_entrenamiento %}
+                <li>{{rutina.dias_entrenamiento}}</li>
+            {% else %}
+                <li>No hay días de entrenamiento</li>
+            {% endif %}
+        <h3>Días de descanso:</h3>
+        <li>{{rutina.dias_descanso}}</li>
+        <h3>Duración de la rutina:</h3>
+        <li>{{rutina.duracion_rutina}}</li>
+    </div>
+{% endfor %}
+</div>
+{% endblock content %}

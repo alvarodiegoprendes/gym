@@ -1,0 +1,42 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Registrarse</title>
+{% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static "gym/css/user/registrarse.css" %}">
+{% endblock extra_css %}
+
+
+{% block content %}
+
+<h2>Crear una Cuenta</h2>
+
+{% for mensaje in messages %}
+    <div class="alert">{{ mensaje }}</div>
+{% endfor %}
+<div class="form-container">
+    <form method="post" action="{% url 'registrarse' %}">
+        {{form.errors}}
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.username.label }} {{ form.username }}
+            {{ form.email.label }} {{ form.email }}
+            {{ form.first_name.label }} {{ form.first_name }}
+            {{ form.last_name.label }} {{ form.last_name }}
+            {{ form.edad.label }} {{ form.edad }}
+            {{ form.genero.label }} {{ form.genero }}
+            {{ form.foto.label }} {{ form.foto }}
+            {{ form.password1.label }} {{ form.password1 }}
+            {{ form.password2.label }} {{ form.password2 }}
+            <h3>Medidas Corporales</h3>
+            {{ form.medidas_corporales }}  <!-- Asegúrate de incluir este campo -->
+        </div>
+        <button type="submit" class="btn-submit">Registrarse</button>
+    </form>
+</div>
+{% endblock content %}
+
+

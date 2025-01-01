@@ -1,0 +1,33 @@
+{% if user.is_authenticated %}
+<nav class="menu_nav">
+    <ul class="menu_ul">
+        <li class="menu_li">
+            <a class="menu_a" href="{% url 'crear_rutina' %}">crear rutina</a>
+        </li>
+        <li class="menu_li">
+            <a class="menu_a" href="{% url 'mostrar_rutinas' %}">mostrar rutinas</a>
+        </li>
+        <li class="menu_li">
+            <a class="menu_a" href="{% url 'crear_actividad' %}">crear actividad</a>
+        </li>
+        <li class="menu_li">
+            <a class="menu_a" href="{% url 'crear_dieta' %}">crear dieta</a>
+        </li>
+        <li class="menu_li">
+            <a class="menu_a" href="{% url 'asignar_gramajes' %}">asignar gramajes</a>
+        </li>
+        <li class="menu_li">
+            <a class="menu_a" href="{% url 'mostrar_alimentos' %}">mostrar alimentos</a>
+        </li>
+        <li class="menu_li">
+            <a class="menu_a" href="{% url 'mostrar_cuenta' %}">mostrar cuenta</a>
+        </li>
+        <li class="menu_li">
+            <a class="menu_a" href="{% url 'logout' %}">logout</a>
+        </li>
+        <li class="menu_li">
+            <a class="menu_a" href="{% url 'login' %}">login</a>
+        </li>
+    </ul>
+</nav>
+{% endif %}

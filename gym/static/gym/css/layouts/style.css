@@ -1,0 +1,41 @@
+/* * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+} */
+
+.menu_nav {
+    background-color: aqua;
+}
+
+.menu_ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.menu_li {
+    padding: 20px;
+}
+
+.menu_ul .menu_li .menu_a {
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+}
+
+main {
+    min-height: 80vh;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}

@@ -1,0 +1,42 @@
+{% extends 'layouts/base.html' %} 
+{% load static %}
+{% block title %}
+
+<title>crear_actividad</title>
+
+{% endblock title %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'gym/css/core/crear_actividad.css' %}">
+
+{% endblock extra_css %}
+
+ 
+{% block content %} 
+
+<form method= 'POST' action="{% url 'crear_actividad' %}">
+    {% csrf_token %}
+    {% for mensaje in messages %}
+
+    {{mensaje}}
+
+    {% endfor %}
+<h3>crea las actividades asociadas a una rutina</h3>
+    <div class="form-container"> <!-- Añadido para contener las tarjetas -->
+        {% for ejercicio, actividad_form_instance in actividad_form %}
+            <div class="tarjeta"> <!-- Añadido para crear la tarjeta -->
+                {{ actividad_form.management_form }}
+                <h2>Ejercicio: {{ ejercicio.nombre }}</h2> 
+                <img src="{{ejercicio.foto.url}}" alt="{{ejercicio.nombre}}">
+                {{actividad_form_instance}}
+            </div> <!-- Fin de la tarjeta -->
+        {% endfor %}
+    </div> <!-- Fin del contenedor de tarjetas -->
+    <button type="submit">Guardar actividad</button>
+</form>
+
+
+
+
+{% endblock content %}

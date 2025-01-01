@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html' %} 
+{% load static %} 
+    {% block title %}
+    <title>crear gramaje y dieta</title>
+    {% endblock title %} 
+
+    {% block content %}
+    <form method="post">
+    {% csrf_token %} 
+    {{ dieta_form.as_p }}
+
+    <!-- Formularios de Gramaje -->
+    {% for gramaje_form in gramaje_forms %} {{ gramaje_form.as_p }} {% endfor %}
+
+    <button type="submit">Guardar Dieta y Gramajes</button>
+</form>
+
+{% endblock %}

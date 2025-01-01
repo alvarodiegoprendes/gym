@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html' %} 
+{% load static %}
+{% block title %}
+<title>Crear Rutina</title>
+{% endblock title %} 
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'gym/css/core/crear_rutina.css'%}" />
+{% endblock extra_css %}
+
+{% block content %} 
+<div class="container-rutina">
+    <h3>Crea una rutina</h3>
+
+    <form method='POST' action="{% url 'crear_rutina' %}">
+        {% csrf_token %}
+        {{ rutinaform }}
+        
+        <div class="dias-semana">
+            {% for dia in form.dias_entrenamiento %}
+                <div class="dia-checkbox">
+                    <input type="checkbox" id="{{ dia.id_for_label }}" name="{{ dia.name }}" {% if dia.value %}checked{% endif %}>
+                    <label for="{{ dia.id_for_label }}">{{ dia.label }}</label>
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Guardar Rutina</button>
+    </form>
+
+    {% if messages %}
+        <div class="mensajes">
+            {% for mensaje in messages %}
+                {{mensaje}}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock content %}

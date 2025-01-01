@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html' %} 
+
+{% block title %}
+
+<title>Crear Dieta</title>
+
+{% endblock title %} 
+
+{% block content %}
+
+<h1>Crear Dieta</h1>
+
+{% for mensaje in messages %}
+
+{{mensaje}}
+
+{% endfor %}
+
+<form method="POST" action="{% url 'crear_dieta' %}">
+    {% csrf_token %} 
+    {{ dietaform.as_p }}
+    <button type="submit">Guardar Dieta</button>
+
+</form>
+
+{% endblock content %}
