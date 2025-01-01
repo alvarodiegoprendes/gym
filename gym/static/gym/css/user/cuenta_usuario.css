@@ -1,0 +1,96 @@
+.perfil-usuario {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.portada-perfil {
+  background: linear-gradient(45deg, #3498db, #2ecc71);
+  height: 200px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.foto-container {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  bottom: -50px;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+}
+
+.foto-perfil {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contenido-perfil {
+  padding: 70px 20px 20px;
+}
+
+.nombre-usuario {
+  text-align: center;
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.info-usuario {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.info-seccion {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.info-seccion p {
+  margin: 10px 0;
+  color: #666;
+}
+
+.info-seccion i {
+  margin-right: 10px;
+  color: #3498db;
+}
+
+.boton-editar {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+    bottom: -25px;
+}
+
+.btn-editar {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-size: 0.9em;
+}
+
+.btn-editar i {
+    margin-right: 8px;
+}
+
+.btn-editar:hover {
+    background-color: #0056b3;
+}

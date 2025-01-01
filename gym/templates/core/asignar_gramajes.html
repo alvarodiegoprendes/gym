@@ -1,0 +1,80 @@
+{% extends 'layouts/base.html' %} 
+
+{% block title %}
+
+<title>asignar gramaje a la dieta</title>
+
+{% endblock title %} 
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'gym/css/core/asignar_gramjes.css' %}">
+{% endblock extra_css %}
+    
+
+{% block content %}
+
+<h1>Asignar Gramajes a la Dieta</h1>
+{% for mensaje in messages %}
+
+{{mensaje}}
+
+{% endfor %}
+
+
+<form action="{% url 'asignar_gramajes' %}" method="GET">
+
+    <input type="text" name="busqueda_alimento" placeholder="buscar alimentos" />
+    <input type="submit" value="buscar" />
+    
+</form>
+
+
+
+<form method="POST" action="{% url 'asignar_gramajes' %}">
+    {% csrf_token %}
+    <hr />
+    <h3>asigna a cada alimento una cantidad para conformar la dieta</h3>
+<div>
+    {{gramajedietaform}}
+</div>
+ 
+
+{% for alimento, gramaje in alimento_gramaje_lista %}
+<table>
+    <tr>
+        <th>{{ alimento.nombre }}</th>
+    </tr>
+    <tr>
+        <th>Calorías:</th>
+        <td>{{ alimento.calorias }}</td>
+    </tr>
+    <tr>
+        <th>Proteínas:</th>
+        <td>{{ alimento.proteinas }}</td>
+    </tr>
+    <tr>
+        <th>Carbohidratos:</th>
+        <td>{{ alimento.carbohidratos }}</td>
+    </tr>
+    <tr>
+        <th>Grasas:</th>
+        <td>{{ alimento.grasas }}</td>
+    </tr>
+    <tr>
+        <th>Cantidad:</th>
+        <td>{{ gramaje.cantidad }}</td>
+    </tr>
+    <tr>
+        <th>Unidad:</th>
+        <td>{{ gramaje.unidad }}</td>
+    </tr>
+</table>
+{% endfor %}
+
+    <button type="submit">Guardar Gramaje</button>
+</form>
+
+<a href="{% url 'crear_dieta' %}">Volver a la página de creación de dieta</a>
+
+{% endblock content %}

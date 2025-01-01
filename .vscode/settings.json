@@ -1,5 +1,9 @@
 {
     "files.associations": {
-        "*.html": "jinja-html"
-    }
+        "*.html": "django-html"
+    },
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.completeFunctionParens": false,
+    "python.analysis.typeCheckingMode": "basic",
+    "editor.fontFamily": "Consolas, 'Courier New', monospace"
 }

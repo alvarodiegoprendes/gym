@@ -1,0 +1,95 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container-rutina {
+    max-width: 600px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.container-rutina h3 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"],
+textarea,
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.dias-semana {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.dia-checkbox {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.dia-checkbox input {
+    margin-right: 10px;
+}
+
+button[type="submit"] {
+    background: #5f3bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background: #5f3bff;
+}
+
+.mensajes {
+    margin-top: 20px;
+    padding: 10px;
+    background: #e0ffe0;
+    border: 1px solid #b3ffb3;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #2c662d;
+}
+
+@media (max-width: 480px) {
+    .dias-semana {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dia-checkbox {
+        width: 100%;
+        justify-content: center;
+    }
+}

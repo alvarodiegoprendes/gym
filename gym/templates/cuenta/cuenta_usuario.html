@@ -1,0 +1,60 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Perfil de Usuario</title>
+{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'gym/css/user/cuenta_usuario.css' %}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock extra_css %}
+
+
+{% block content %}
+
+{% for mensaje in messages %}
+    <div class="alert">{{ mensaje }}</div>
+{% endfor %}
+
+<div class="perfil-usuario">
+    <div class="portada-perfil">
+        <div class="foto-container">
+            <img src="{{ usuario.foto.url }}" alt="Foto de perfil" class="foto-perfil" />
+        </div>
+    </div>
+    
+    <div class="contenido-perfil">
+        <h1 class="nombre-usuario">{{ usuario.username }}</h1>
+        <div class="boton-editar">
+            <a href="{% url 'editar_cuenta' %}" class="btn-editar">
+                <i class="fas fa-edit"></i> Editar Perfil
+            </a>
+        </div>
+        <div class="info-usuario">
+            <div class="info-seccion">
+                <p><i class="fas fa-birthday-cake"></i> <strong>Edad:</strong> {{ usuario.edad }}</p>
+                <p><i class="fas fa-venus-mars"></i> <strong>Género:</strong> {{ usuario.genero }}</p>
+                
+                    <p><i class="fas fa-user-tie"></i> <strong>Es entrenador:</strong> {% if usuario.es_entrenador %}SI{% else %}NO{% endif %}</p>
+                    <p><i class="fas fa-user-tie"></i> <strong>Entrenador asignado:</strong> {{ usuario.entrenador| default:"NO" }}</p>
+                
+            </div>
+            <div class="info-seccion">
+                    <p><i class="fas fa-dumbbell"></i> <strong>Rutina:</strong> {{ usuario.rutina.rutina.nombre }}</p>
+                
+                    <p><i class="fas fa-star"></i> <strong>Suscripción:</strong> {{ usuario.suscripcion.fecha_inscripcion}}-{{usuario.suscripcion.fecha_vencimiento}}</p>
+                    <p><i class="fas fa-ruler"></i> <strong>Medidas Corporales:</strong></p>
+                    <ul class="medidas-list">
+                        <li>Altura: {{ usuario.medidas_corporales.altura|default:"No registrado" }} cm</li>
+                        <li>Peso: {{ usuario.medidas_corporales.peso|default:"No registrado" }} kg</li>
+                        <li>Porcentaje de grasa: {{ usuario.medidas_corporales.porcentaje_grasa|default:"No registrado" }}%</li>
+                    </ul>
+        
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+

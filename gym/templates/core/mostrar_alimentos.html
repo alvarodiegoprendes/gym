@@ -1,0 +1,38 @@
+{% extends "layouts/base.html" %} 
+
+{% block title %}
+
+<title>mostrar alimentos</title>
+
+{% endblock title %} 
+
+{% block content %}
+
+<h3>mostrando alimentos</h3>
+
+<form action="{% url 'mostrar_alimentos' %}" method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="busqueda_alimento" placeholder="buscar alimentos" />
+    
+    <input type="submit" value="buscar" />
+</form>
+
+<ul>
+    {% for alimento in alimentos %}
+
+    <li>{{alimento.nombre}}</li>
+
+    {% endfor %}
+</ul>
+<h3>mostrando los gramajes asignados al alimento 1</h3>
+<ul>
+    {% for gramaje_alimento in gramaje_alimentos %}
+    <li>
+        {{gramaje_alimento.alimentos.nombre}} y su cantidad es {{gramaje_alimento.cantidad}}
+    </li>
+
+    {% endfor %}
+</ul>
+
+{% endblock content %}

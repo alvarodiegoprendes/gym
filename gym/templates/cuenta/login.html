@@ -1,0 +1,40 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Iniciar Sesión</title>
+{% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'gym/css/user/login.css' %}" />
+{% endblock extra_css %}
+
+{% block content %}
+
+{% for mensaje in messages %}
+
+    {{mensaje}}
+
+{% endfor %}
+
+<div class="login-container">
+    <form method="POST" action="{% url 'login' %}" class="styled-form">
+        {% csrf_token %}
+        <div>
+            {{ form.username.label_tag }} <!-- Etiqueta del nombre de usuario -->
+            {{ form.username }} <!-- Campo de entrada del nombre de usuario -->
+        </div>
+        <div>
+            {{ form.password.label_tag }} <!-- Etiqueta de la contraseña -->
+            {{ form.password }} <!-- Campo de entrada de la contraseña -->
+        </div>
+        <button type="submit">Iniciar Sesión</button>
+
+    </form>
+    <p><a href="{% url 'registrarse' %}">Registrese aqui</a></p> 
+    {# Asume que configura la vista de restablecimiento de contraseña en su URLconf #}
+    {% comment %} <p><a href="{% url 'password_reset' %}">¿Olvidó su contraseña?</a></p> {% endcomment %}
+</div>
+{% endblock content %}
+
+
