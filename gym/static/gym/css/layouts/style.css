@@ -1,41 +1,51 @@
-/* * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-} */
-
+/* Estilos generales */
 .menu_nav {
-    background-color: aqua;
+    background-color: #3498db; /* Azul principal */
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Sombra ligera */
+    font-family: 'Arial', sans-serif; /* Fuente moderna */
 }
 
 .menu_ul {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    list-style: none; /* Quitar viñetas */
     padding: 0;
+    margin: 0;
+    display: flex; /* Flexbox para la disposición */
+    flex-wrap: wrap; /* Permitir que los elementos pasen a la siguiente línea en pantallas pequeñas */
+    justify-content: center; /* Centrar horizontalmente */
 }
 
 .menu_li {
-    padding: 20px;
+    margin: 5px 10px; /* Espaciado entre elementos */
 }
 
-.menu_ul .menu_li .menu_a {
-    text-decoration: none;
-    font-size: 20px;
-    color: black;
+.menu_a {
+    text-decoration: none; /* Quitar subrayado */
+    color: white; /* Texto blanco */
+    background-color: #2980b9; /* Azul más oscuro al fondo */
+    padding: 10px 15px; /* Relleno alrededor del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease; /* Transición suave al hacer hover */
+    display: block; /* Hacer el enlace ocupar todo el bloque */
+    text-align: center; /* Centrar el texto */
 }
 
-main {
-    min-height: 80vh;
+.menu_a:hover {
+    background-color: #1c5fa8; /* Azul más oscuro al hacer hover */
 }
 
-footer {
-    background-color: black;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
+/* Estilos para móviles (pantallas pequeñas) */
+@media (max-width: 768px) {
+    .menu_ul {
+        flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
+        align-items: center; /* Centrar los items verticalmente */
+    }
+    .menu_li {
+        margin: 5px 0; /* Ajustar márgenes en dispositivos pequeños */
+        width: 90%; /* Para que los elementos ocupen un 90% de ancho */
+    }
+    .menu_a {
+        width: 100%; /* Ancho completo */
+        box-sizing: border-box; /* Asegurar que el padding no agregue ancho */
+    }
 }
