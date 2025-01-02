@@ -1,0 +1,50 @@
+{% extends "layouts/base.html" %} 
+{% load static %}
+{% block title %}
+
+<title>mostrando todas las actividades</title>
+
+{% endblock title %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet" type="text/css" href="{% static "gym/css/core/mostrar_actividad.css" %}">
+
+{% endblock extra_css %}
+
+
+{% block content %} 
+    {% if actividades %}
+        {% for actividades, rutina in actividades %}
+            <h2>Nombre de la Rutina: {{ rutina.nombre }}</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ejercicio</th>
+                        <th>Repeticiones</th>
+                        <th>Peso</th>
+                        <th>Duración</th>
+                        <th>Tiempo de Descanso</th>
+                        <th>Cantidad de Series</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for actividad in actividades %}
+                        <tr>
+                            <td>{{ actividad.ejercicios.nombre }}</td>
+                            <td>{{ actividad.repeticiones }}</td>
+                            <td>{{ actividad.peso }} kg</td>
+                            <td>{{ actividad.duracion_ejercicio }}</td>
+                            <td>{{ actividad.tiempo_descanso }}</td>
+                            <td>{{ actividad.cantidad_series }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+    {% else %}
+        <p>No hay actividades registradas.</p>
+    {% endif %}
+
+{% endblock content %}

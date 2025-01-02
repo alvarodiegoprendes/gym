@@ -12,8 +12,9 @@ urlpatterns = [
     path('mostrar_alimentos/',views.mostrar_alimentos,name='mostrar_alimentos'),
     path('asignar_gramajes/', views.asignar_gramaje, name='asignar_gramajes'),
     path('mostrar_rutinas/',views.RutinaListView.as_view(),name='mostrar_rutinas'),
-
     path('eliminar_rutinas/<int:id_rutina>/', views.eliminar_rutinas, name='eliminar_rutinas'),
+
+    path('mostrar_actividad/',views.mostrar_actividad,name='mostrar_actividad'),
 
 
 ]

@@ -1,3 +1,4 @@
+from http.client import CannotSendHeader
 from urllib import request
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
@@ -131,24 +132,25 @@ def crear_actividad(request):
                 duracion_ejercicio = request.POST.get(f'{ejercicio.id}-duracion_ejercicio')
                 
                # actividad = Actividad(peso=peso, repeticiones=repeticiones, cantidad_series=cantidad_series, tiempo_descanso=tiempo_descanso, duracion_ejercicio=duracion_ejercicio,ejercicios=Ejercicios.objects.get(nombre=ejercicio),rutina=Rutina.objects.get(nombre=rutinaform.cleaned_data['rutina']))
-                actividad = ActividadForm(data={
-                    'peso': peso,
-                    'repeticiones': repeticiones,
-                    'cantidad_series': cantidad_series,
-                    'tiempo_descanso': tiempo_descanso,
-                    'duracion_ejercicio': duracion_ejercicio,
-                    'ejercicios': Ejercicios.objects.get(id=ejercicio.id),
-                    'rutina': Rutina.objects.get(nombre=rutinaform.cleaned_data['rutina'])
-                })
+                if peso != '0' and repeticiones != '0' and cantidad_series != '0':
+                    actividad = ActividadForm(data={
+                        'peso': peso,
+                        'repeticiones': repeticiones,
+                        'cantidad_series': cantidad_series,
+                        'tiempo_descanso': tiempo_descanso,
+                        'duracion_ejercicio': duracion_ejercicio,
+                        'ejercicios': Ejercicios.objects.get(id=ejercicio.id),
+                        'rutina': Rutina.objects.get(nombre=rutinaform.cleaned_data['rutina'])
+                    })
 
-                if actividad.is_valid():
-                    actividad.save()
-                else:
-                    messages.error(request,"sus datos no son validos")
-                    return redirect('crear_actividad')
+                    if actividad.is_valid():
+                        actividad.save()
+                    else:
+                        messages.error(request,"sus datos no son validos")
+                        return redirect('crear_actividad')
 
             messages.success(request, "Sus datos se han guardado correctamente")
-            return redirect('crear_rutina')
+            return redirect('mostrar_actividad')
         else:
             messages.error(request,"sus datos no son validos")
             return redirect('crear_actividad')
@@ -168,9 +170,19 @@ def crear_actividad(request):
                     actividad.ejercicios = Ejercicios.objects.get(nombre=actividadform.prefix.replace('_', ' '))
                     actividad.save()
  """
-
-
-    
+def mostrar_actividad(request):
+    if request.method=="GET":
+        rutinas=Rutina.objects.all()
+        actividades_lista=[]
+        for rutina in rutinas:
+            actividades = Actividad.objects.filter(rutina=rutina)
+            actividades_lista.append((actividades,rutina))
+        contexto={
+            "actividades": actividades_lista
+            }
+        return render(request,'core/mostrar_actividad.html',contexto)
+    else:
+        HttpResponse('el metodo es post y no es valido')
 
 @login_required(login_url='login')    
 def crear_dieta(request):
