@@ -1,6 +1,6 @@
 from urllib import request
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from .models import *
 from .forms import *
@@ -315,7 +315,13 @@ class RutinaListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         messages.error(self.request, 'Usted no tiene permisos para acceder a esta pagina')
         return redirect('mostrar_cuenta')
 
-
+def eliminar_rutinas(request,id_rutina):
+    if not request.user.es_entrenador:
+        messages.error(request,'Usted no tiene permisos para acceder a esta pagina')
+        return redirect('mostrar_cuenta')
+    rutina=get_object_or_404(Rutina,id=id_rutina)
+    rutina.delete()
+    return redirect("mostrar_rutinas")    
 
 """ def asignar_gramajes(request, dieta_id):
     dieta = get_object_or_404(Dieta, id=dieta_id)
