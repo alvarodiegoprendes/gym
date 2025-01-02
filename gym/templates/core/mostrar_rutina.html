@@ -29,6 +29,10 @@
         <li>{{rutina.dias_descanso}}</li>
         <h3>Duración de la rutina:</h3>
         <li>{{rutina.duracion_rutina}}</li>
+        <form action="{% url 'eliminar_rutinas' rutina.id %}" method="POST" >
+            {% csrf_token %}
+            <button type="submit" class="boton-eliminar" onclick="return confirm('¿Estás seguro de que deseas eliminar esta rutina?');">Eliminar</button>
+        </form>
     </div>
 {% endfor %}
 </div>
